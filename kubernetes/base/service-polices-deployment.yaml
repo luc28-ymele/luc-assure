@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-polices
+  namespace: luc-assure
+  labels:
+    app: service-polices
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service-polices
+  template:
+    metadata:
+      labels:
+        app: service-polices
+    spec:
+      containers:
+        - name: service-polices
+          image: 982534362480.dkr.ecr.ca-central-1.amazonaws.com/luc-assure/service-polices:1.0.0
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
