@@ -17,3 +17,10 @@ terraform.rc
 *.pem
 *.key
 .env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
