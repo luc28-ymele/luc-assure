@@ -30,3 +30,25 @@ jobs:
 
       - name: Lancer les tests unitaires
         run: python -m pytest tests/ -v
+
+  sonarqube_analysis:
+    name: Analyse de code SonarQube
+    runs-on: [self-hosted, sonarqube]
+    needs: test
+    defaults:
+      run:
+        working-directory: services/service-polices
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Lancer l'analyse SonarQube
+        uses: sonarsource/sonarqube-scan-action@v4
+        with:
+          projectBaseDir: services/service-polices
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
