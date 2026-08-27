@@ -60,7 +60,7 @@ jobs:
           python -m pytest tests/ --cov=app --cov-report=xml
 
       - name: Lancer l'analyse SonarQube
-        uses: sonarsource/sonarqube-scan-action@v5
+        uses: sonarsource/sonarqube-scan-action@v6
         with:
           projectBaseDir: services/service-polices
         env:
