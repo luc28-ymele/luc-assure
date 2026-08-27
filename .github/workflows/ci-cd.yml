@@ -66,3 +66,26 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+  sca_analysis:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer les dépendances du service
+        working-directory: services/service-polices
+        run: pip install -r requirements.txt
+
+      - name: Installer pip-audit
+        run: pip install pip-audit
+
+      - name: Scanner les dépendances (pip-audit)
+        working-directory: services/service-polices
+        run: pip-audit -r requirements.txt
