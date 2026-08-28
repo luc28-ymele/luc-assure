@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # Étape 1 : "builder" — installe les dépendances Python dans un environnement isolé
 # ---------------------------------------------------------------------------
-FROM python:3.12-slim AS builder
+FROM python:3.12-alpine AS builder
 
 WORKDIR /app
 
@@ -12,11 +12,11 @@ RUN pip install --no-cache-dir --target=/install -r requirements.txt
 # ---------------------------------------------------------------------------
 # Étape 2 : image finale — minimale, sans outils de build inutiles
 # ---------------------------------------------------------------------------
-FROM python:3.12-slim
-
+FROM python:3.12-alpine
+RUN apk update && apk upgrade --no-cache libcrypto3 libssl3
 # Créer un utilisateur non-root (bonne pratique de sécurité : ne jamais faire
 # tourner un conteneur en root)
-RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN addgroup -S appuser && adduser -S -G appuser appuser
 
 WORKDIR /app
 
