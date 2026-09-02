@@ -68,7 +68,7 @@ module "budget" {
   project_name = "luc-assure"
   environment  = "dev"
 
-  monthly_limit_usd            = 20
+  monthly_limit_usd            = 5
   alert_thresholds_percent     = [50, 80, 100]
   forecasted_threshold_percent = 100
 
