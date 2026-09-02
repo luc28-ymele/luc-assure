@@ -24,3 +24,14 @@ __pycache__/
 *.pyc
 .pytest_cache/
 *.egg-info/
+# GitHub Actions self-hosted runner (binaire local, ne doit jamais être versionné)
+actions-runner/
+
+# Rapports de tests / sécurité générés par la CI (artefacts, pas du code source)
+.coverage
+coverage.xml
+trivy-report.txt
+
+# Captures d'écran isolées accidentellement à la racine
+# (les captures officielles vivent dans docs/screenshots/)
+/screenshots.png
