@@ -4,15 +4,32 @@ Plateforme d'infrastructure automatisée et sécurisée simulant une compagnie d
 
 Voir `docs/architecture.md` pour la description complète du projet.
 
+## Aperçu du projet
+
+**Infrastructure provisionnée avec Terraform**
+![VPC déployé](docs/screenshots/03-terraform-apply-vpc.png)
+
+**Cluster EKS opérationnel**
+![Cluster EKS](docs/screenshots/06-eks-cluster-nodes-ready.png)
+
+**Service déployé et exposé publiquement**
+![Load Balancer public](docs/screenshots/10-service-policies-public-loadbalancer-endpoints.png)
+
+**Pipeline CI/CD avec contrôles qualité et sécurité**
+![Pipeline 3 jobs verts](docs/screenshots/13-pipeline-3-jobs-verts.png)
+
+**Scan de vulnérabilités et remédiation**
+![Vulnérabilités corrigées](docs/screenshots/17-trivy-scan-19-vulnerabilites-image-slim.png)
+
 ## Statut
 
 - [x] Structure du dépôt
 - [x] Module Terraform VPC
-- [ ] Backend Terraform déployé (S3 + DynamoDB)
-- [ ] VPC déployé sur AWS
-- [ ] Module EKS
-- [ ] Premier microservice conteneurisé
-- [ ] Pipeline GitHub Actions
+- [x] Backend Terraform déployé (S3 + DynamoDB)
+- [x] VPC déployé sur AWS
+- [x] Module EKS
+- [x] Premier microservice conteneurisé
+- [x] Pipeline GitHub Actions
 
 ## Démarrage — Jour 1
 
