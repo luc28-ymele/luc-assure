@@ -62,21 +62,6 @@
 #   }
 # }
 
-module "budget" {
-  source = "../../modules/budget"
 
-  project_name = "luc-assure"
-  environment  = "dev"
-
-  monthly_limit_usd            = 5
-  alert_thresholds_percent     = [50, 80, 100]
-  forecasted_threshold_percent = 100
-
-  # ⚠️ Remplace par ta vraie adresse courriel avant de faire terraform apply
-  notification_emails = ["lucymel95@gmail.com"]
-
-  tags = {
-    Owner = "luc"
-  }
-}
-
+# Le budget AWS n'est plus géré ici : il vit dans envs/global, un state séparé
+# que end-of-session.sh ne détruit jamais.

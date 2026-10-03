@@ -35,3 +35,4 @@ trivy-report.txt
 # Captures d'écran isolées accidentellement à la racine
 # (les captures officielles vivent dans docs/screenshots/)
 /screenshots.png
+gitleaks-report.json

@@ -23,4 +23,9 @@ resource "aws_budgets_budget" "monthly_cost" {
     notification_type          = "FORECASTED"
     subscriber_email_addresses = var.notification_emails
   }
+
+  # Garde-fou : un terraform destroy doit échouer plutôt que supprimer le budget
+  lifecycle {
+    prevent_destroy = true
+  }
 }

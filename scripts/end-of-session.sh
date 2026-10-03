@@ -119,6 +119,15 @@ echo "Vérifie ci-dessus qu'AUCUNE ligne non vide n'apparaît sous chaque"
 echo "région/service. Si quelque chose apparaît, ne quitte pas ta session"
 echo "avant de l'avoir identifié et supprimé manuellement."
 echo ""
-echo "Rappel : le budget AWS (luc-assure-dev-monthly-budget) reste actif en"
-echo "permanence et est gratuit — il t'enverra un courriel si un seuil de"
-echo "dépense est atteint, en plus de ce script."
+echo "======================================================================"
+echo " ÉTAPE 9 — Vérification du garde-fou : budget AWS"
+echo "======================================================================"
+BUDGET_NAME="luc-assure-global-monthly-budget"
+ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+if aws budgets describe-budget --account-id "$ACCOUNT_ID" \
+        --budget-name "$BUDGET_NAME" > /dev/null 2>&1; then
+    echo "✅ Budget $BUDGET_NAME actif (géré dans envs/global, jamais détruit par ce script)."
+else
+    echo "❌ ATTENTION : budget $BUDGET_NAME introuvable — tu n'as plus d'alerte de coût."
+    echo "   Recrée-le : cd infra/terraform/envs/global && terraform init && terraform apply"
+fi
